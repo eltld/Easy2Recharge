@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.technicus.easy2recharge">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.SplashScreen"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+            android:name=".ui.LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".ui.SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:parentActivityName=".ui.LoginActivity" />
+
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/title_activity_main"></activity>
+    </application>
+
+</manifest>

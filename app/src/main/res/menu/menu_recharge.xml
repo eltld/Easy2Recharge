@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.technicus.easy2recharge.RechargeActivity">
+
+    <item
+        android:id="@+id/action_signout"
+        android:icon="@drawable/sign_out"
+        android:title="Sign Out"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_signin"
+        android:icon="@drawable/sign_in"
+        android:title="Sign Out"
+        android:visible="false"
+        app:showAsAction="always" />
+</menu>

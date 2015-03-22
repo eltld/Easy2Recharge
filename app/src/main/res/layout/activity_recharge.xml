@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- The main content view -->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.technicus.easy2recharge.RechargeActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/radio_grp1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/prepaid_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:text="Prepaid"
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/postpaid_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:text="Postpaid" />
+            </RadioGroup>
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                android:id="@+id/phn_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout_gravity = "center"
+                android:layout_gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp"
+
+                android:hint="Enter Your Number"
+                android:inputType="number"
+                android:maxLines="1"
+                android:singleLine="true"
+                bootstrapbutton:be_roundedCorners="true" />
+
+            <Spinner
+                android:id="@+id/operator1"
+                style="@style/Widget.AppCompat.Light.Spinner.DropDown.ActionBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal" />
+
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                android:id="@+id/amnt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+
+                android:hint="Enter Amount"
+                android:inputType="number"
+                android:lines="1"
+                bootstrapbutton:be_roundedCorners="true" />
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/recharge_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_marginTop="25dp"
+                android:text="Recharge Now"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_size="default"
+                bootstrapbutton:bb_type="primary" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!-- The navigation drawer -->
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/background_floating_material_light"
+        android:choiceMode="singleChoice"
+        android:divider="@color/easy_blue"
+        android:dividerHeight="0.1dp" />
+</android.support.v4.widget.DrawerLayout>

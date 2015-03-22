@@ -33,8 +33,9 @@
             android:id="@+id/mobile_number_coupon_selection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dance of death"
-            android:textSize="16sp" />
+            android:text="Amount"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
@@ -57,23 +58,19 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Coupon Code" />
-
         <EditText
             android:id="@+id/coupon_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:hint="Enter Coupon Code" />
+            android:layout_marginLeft="5dp"
+            android:hint="Enter Coupon Code"
+            android:textSize="14sp" />
 
         <Button
-            android:layout_width="wrap_content"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-
             android:text="Apply" />
 
     </LinearLayout>
@@ -81,18 +78,18 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:background="@color/easy_blue" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="Total Order "
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -100,24 +97,27 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
             android:gravity="right"
-            android:text="223" />
+            android:text="Rs 220"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@color/easy_blue" />
 
-    <Button
-        android:id="@+id/proceed_to_pay_button"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        android:layout_height="wrap_content"
-
-        android:text="Proceed to Pay" />
-
+        <Button
+            android:id="@+id/proceed_to_pay_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="Proceed to Pay" />
+    </LinearLayout>
 </LinearLayout>

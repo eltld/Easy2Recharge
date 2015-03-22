@@ -267,8 +267,6 @@ public class ApiUtils {
     private String getJsonAsStringFromUrl(String url) {
         Log.d("App", url);
         HttpParams httpParameters = new BasicHttpParams();
-        HttpConnectionParams.setConnectionTimeout(httpParameters, 2000);
-        HttpConnectionParams.setSoTimeout(httpParameters, 2000);
         DefaultHttpClient httpclient = new DefaultHttpClient(httpParameters);
 
         HttpPost httppost = new HttpPost(url);
@@ -300,6 +298,7 @@ public class ApiUtils {
                 s.printStackTrace();
             }
         }
+       // Log.d("json ", result);
         return result;
     }
 

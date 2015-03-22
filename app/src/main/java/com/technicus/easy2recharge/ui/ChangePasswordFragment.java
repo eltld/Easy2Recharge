@@ -1,15 +1,14 @@
 package com.technicus.easy2recharge.ui;
 
-
+import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -19,22 +18,28 @@ import com.technicus.easy2recharge.utils.ApiUtils;
 import com.technicus.easy2recharge.utils.Constants;
 import com.technicus.easy2recharge.utils.MiscUtils;
 
-public class ChangePasswordActivity extends ActionBarActivity {
+public class ChangePasswordFragment extends Fragment {
 
     BootstrapEditText oldPassword, newPassword, confirmPassword;
     BootstrapButton passwordChangeSubmit;
     SharedPreferences prefs;
-    ActionBar actionBar;
+    View view;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_password);
-        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        oldPassword = (BootstrapEditText) findViewById(R.id.old_password);
-        newPassword = (BootstrapEditText) findViewById(R.id.new_password);
-        confirmPassword = (BootstrapEditText) findViewById(R.id.new_password_confirm);
-        passwordChangeSubmit = (BootstrapButton) findViewById(R.id.password_change_submit);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_change_password, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        view = getView();
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+        oldPassword = (BootstrapEditText) view.findViewById(R.id.old_password);
+        newPassword = (BootstrapEditText) view.findViewById(R.id.new_password);
+        confirmPassword = (BootstrapEditText) view.findViewById(R.id.new_password_confirm);
+        passwordChangeSubmit = (BootstrapButton) view.findViewById(R.id.password_change_submit);
 
         passwordChangeSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,27 +54,18 @@ public class ChangePasswordActivity extends ActionBarActivity {
                 String old = prefs.getString(Constants.PREF_PASS, "");
 
                 if ((old.equals(oldPassMd5)) && (newPass.equals(newPassConfirm))) {
-                    if (MiscUtils.hasInternetConnectivity(getBaseContext())) {
+                    if (MiscUtils.hasInternetConnectivity(view.getContext())) {
                         new ChangePasswordTask().execute(
                                 uid  //uid
                                 , MiscUtils.MD5(newPass) //password in md5 hash
                         );
                     }
                 } else {
-                    Toast.makeText(getBaseContext(), "Please Enter Correct Values", Toast.LENGTH_SHORT)
+                    Toast.makeText(view.getContext(), "Please Enter Correct Values", Toast.LENGTH_SHORT)
                             .show();
                 }
             }
         });
-
-        actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.log1);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     }
 
@@ -80,7 +76,7 @@ public class ChangePasswordActivity extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(ChangePasswordActivity.this);
+            pDialog = new ProgressDialog(getActivity());
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -88,11 +84,11 @@ public class ChangePasswordActivity extends ActionBarActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            ApiUtils apiUtils = new ApiUtils(getBaseContext());
+            ApiUtils apiUtils = new ApiUtils(view.getContext());
             String status = apiUtils.changePassWord(ApiUtils.CHANGE_PASSWORD_TASK, strings[0],
                     strings[1]);
             //update password
-            prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            prefs = PreferenceManager.getDefaultSharedPreferences(view.getContext());
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString(Constants.PREF_PASS, strings[1]);
             editor.commit();
@@ -105,14 +101,12 @@ public class ChangePasswordActivity extends ActionBarActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
-            Toast.makeText(getBaseContext(), status, Toast.LENGTH_SHORT)
+            Toast.makeText(view.getContext(), status, Toast.LENGTH_SHORT)
                     .show();
             if (status.equals(ApiUtils.SUCCESS)) {
-                startActivity(new Intent(getBaseContext(), RechargeActivity.class));
-                finish();
+                getFragmentManager().beginTransaction().add(new RechargeFragment(), "").commit();
+
             }
         }
     }
-
-
 }

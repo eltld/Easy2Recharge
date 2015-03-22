@@ -12,9 +12,6 @@ import com.technicus.easy2recharge.utils.ApiUtils;
 import com.technicus.easy2recharge.utils.EWalletHistory;
 import com.technicus.easy2recharge.utils.OrderDetail;
 
-/**
- * Created by rahul on 8/1/15.
- */
 public class WalletHistoryAdapter extends BaseAdapter {
 
     EWalletHistory[] walletHistories;

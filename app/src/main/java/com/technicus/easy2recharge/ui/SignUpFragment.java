@@ -1,16 +1,14 @@
 package com.technicus.easy2recharge.ui;
 
 
+import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -20,23 +18,27 @@ import com.technicus.easy2recharge.utils.ApiUtils;
 import com.technicus.easy2recharge.utils.MiscUtils;
 import com.technicus.easy2recharge.utils.UserDetail;
 
-public class SignUpActivity extends ActionBarActivity {
+public class SignUpFragment extends Fragment {
 
-    ActionBar actionBar;
     BootstrapEditText number, name, email, password;
     BootstrapButton signUpButton;
     SharedPreferences prefs;
+    View view;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
-        name = (BootstrapEditText) findViewById(R.id.name_edittext);
-        number = (BootstrapEditText) findViewById(R.id.mobile_edittext);
-        email = (BootstrapEditText) findViewById(R.id.email_edittext);
-        password = (BootstrapEditText) findViewById(R.id.password_edditext);
-        signUpButton = (BootstrapButton) findViewById(R.id.signup_button);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_sign_up, container, false);
+    }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        view = getView();
+        name = (BootstrapEditText) view.findViewById(R.id.name_edittext);
+        number = (BootstrapEditText) view.findViewById(R.id.mobile_edittext);
+        email = (BootstrapEditText) view.findViewById(R.id.email_edittext);
+        password = (BootstrapEditText) view.findViewById(R.id.password_edditext);
+        signUpButton = (BootstrapButton) view.findViewById(R.id.signup_button);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,52 +50,21 @@ public class SignUpActivity extends ActionBarActivity {
                 //validations
 
                 if (fname != null || mobile != null || email_address != null || pass != null) {
-                    if ((MiscUtils.hasInternetConnectivity(getBaseContext()))) {
+                    if ((MiscUtils.hasInternetConnectivity(view.getContext()))) {
                         if (mobile.length() == 10 && email_address.contains("@"))
                             new SignUpTask().execute(fname, mobile, email_address,
                                     MiscUtils.MD5(pass));
                         else
-                            Toast.makeText(getBaseContext(), "Entered Data is Invalid", Toast.LENGTH_SHORT)
+                            Toast.makeText(view.getContext(), "Entered Data is Invalid", Toast.LENGTH_SHORT)
                                     .show();
                     } else {
-                        Toast.makeText(getBaseContext(), getString(R.string.no_internet), Toast.LENGTH_SHORT)
+                        Toast.makeText(view.getContext(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT)
                                 .show();
                     }
                 }
             }
         });
 
-        actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.log1);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        // getMenuInflater().inflate(R.menu.menu_sign_up, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private class SignUpTask extends AsyncTask<String, Void, UserDetail> {
@@ -102,7 +73,7 @@ public class SignUpActivity extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(SignUpActivity.this);
+            pDialog = new ProgressDialog(getActivity());
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -110,7 +81,7 @@ public class SignUpActivity extends ActionBarActivity {
 
         @Override
         protected UserDetail doInBackground(String... strings) {
-            ApiUtils apiUtils = new ApiUtils(getBaseContext());
+            ApiUtils apiUtils = new ApiUtils(view.getContext());
             UserDetail userDetail;
             userDetail = apiUtils.signUp(ApiUtils.SIGNUP_TASK, strings[0],
                     strings[1],
@@ -126,17 +97,17 @@ public class SignUpActivity extends ActionBarActivity {
                 pDialog.dismiss();
             String status = userDetail.getSignup();
             if (status.equals(ApiUtils.SUCCESS)) {
-                Intent mIntent = new Intent(getBaseContext(), RechargeActivity.class);
 
-                startActivity(mIntent);
-                Toast.makeText(getBaseContext(), "Successfull Signup", Toast.LENGTH_SHORT)
+                getFragmentManager().beginTransaction().replace(R.id.content_frame
+                        , new RechargeFragment()).commit();
+                Toast.makeText(view.getContext(), "Successfull Signup", Toast.LENGTH_SHORT)
                         .show();
 
             } else {
-                Toast.makeText(getBaseContext(), userDetail.getFAILED_REASON(), Toast.LENGTH_SHORT)
+                Toast.makeText(view.getContext(), userDetail.getFAILED_REASON(), Toast.LENGTH_SHORT)
                         .show();
             }
-            finish();
+
         }
     }
 }

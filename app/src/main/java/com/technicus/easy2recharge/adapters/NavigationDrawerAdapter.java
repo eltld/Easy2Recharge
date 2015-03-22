@@ -11,9 +11,7 @@ import android.widget.TextView;
 import com.technicus.easy2recharge.R;
 import com.technicus.easy2recharge.utils.Constants;
 
-/**
- * Created by Marty Friedman on 5/1/15.
- */
+
 public class NavigationDrawerAdapter extends BaseAdapter {
 
     Context context;

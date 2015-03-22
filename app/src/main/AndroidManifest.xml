@@ -20,43 +20,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.RechargeActivity"
-            android:label="@string/title_activity_recharge" />
-        <activity
             android:name=".ui.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".ui.SignUpActivity"
             android:label="@string/title_activity_sign_up"
             android:parentActivityName=".ui.LoginActivity" />
+
+
         <activity
-            android:name=".ui.ChangePasswordActivity"
-            android:label="@string/title_activity_change_password"
-            android:parentActivityName=".ui.RechargeActivity" />
-        <activity
-            android:name=".ui.OrderHistory"
-            android:label="@string/title_activity_order_history"
-            android:parentActivityName=".ui.RechargeActivity" />
-        <activity
-            android:name=".ui.EWalletActivity"
-            android:label="@string/title_activity_ewallet"
-            android:parentActivityName=".ui.RechargeActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".ui.MyAccount"
-            android:label="@string/title_activity_my_account"
-            android:parentActivityName=".ui.RechargeActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.technicus.easy2recharge.ui.RechargeActivity" />
-        </activity>
-        <activity
-            android:name=".CouponSelection"
-            android:label="@string/title_activity_coupon_selection" />
-        <activity
-            android:name=".ui.AddToWalletTransaction"
-            android:label="@string/title_activity_add_to_wallet_transaction"></activity>
+            android:name=".ui.MainActivity"
+            android:label="@string/title_activity_main"></activity>
     </application>
 
 </manifest>

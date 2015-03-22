@@ -5,9 +5,7 @@ import com.technicus.easy2recharge.R;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by the PhantomOfTheOpera
- */
+
 public abstract class Constants {
 
     public static final String PREF_LOGIN = "pref_login";
@@ -18,11 +16,13 @@ public abstract class Constants {
     public static final String USERDATA = "userdata";
 
     public static final String[] drawerListItems = new String[]{
-            "My Account", "E-Wallet", "Your Orders", "Change Password", "FeedBack"
+            "Home",
+            "My Account", "E-Wallet", "Your Orders", "Change Password"
     };
 
     public static final int[] drawerListIcons = new int[]{
-            R.drawable.my_account, R.drawable.ewallet, R.drawable.history, R.drawable.password, R.drawable.feedback,
+            R.drawable.home,
+            R.drawable.my_account, R.drawable.ewallet, R.drawable.history, R.drawable.password,
             R.drawable.sign_out
     };
     public static final Map<String, String> PrepaidOperator = new HashMap<String, String>() {

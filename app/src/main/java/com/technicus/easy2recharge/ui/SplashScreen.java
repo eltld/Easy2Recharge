@@ -27,13 +27,13 @@ public class SplashScreen extends Activity {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         if (!(MiscUtils.hasInternetConnectivity(getBaseContext()))) {
-            Toast.makeText(getBaseContext(), getString(R.string.no_internet),
+            Toast.makeText(getBaseContext(), getString(R.string.no_internet_connection),
                     Toast.LENGTH_SHORT).show();
         }
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 //TODO authentication from server
-                startActivity(new Intent(SplashScreen.this, RechargeActivity.class));
+                startActivity(new Intent(SplashScreen.this, MainActivity.class));
                 finish();
             }
         }, SPLASH_DURATION);

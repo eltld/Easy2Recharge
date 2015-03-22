@@ -11,9 +11,6 @@ import com.technicus.easy2recharge.R;
 import com.technicus.easy2recharge.utils.ApiUtils;
 import com.technicus.easy2recharge.utils.OrderDetail;
 
-/**
- * Created by Kerry King on 7/1/15.
- */
 public class OrderHistoryAdapter extends BaseAdapter {
     OrderDetail[] orderDetail;
     Context context;
@@ -25,7 +22,6 @@ public class OrderHistoryAdapter extends BaseAdapter {
         inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.uid = uid;
-
         orderDetail = new ApiUtils(context).getOrderDetails(uid);
 
 
